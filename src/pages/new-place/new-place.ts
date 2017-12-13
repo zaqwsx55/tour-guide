@@ -1,25 +1,30 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the NewPlacePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Component, OnInit } from '@angular/core';
+import { IonicPage } from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @IonicPage()
 @Component({
   selector: 'page-new-place',
   templateUrl: 'new-place.html',
 })
-export class NewPlacePage {
+export class NewPlacePage implements OnInit {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  newPlaceForm: FormGroup;
+
+  constructor(private formBuilder: FormBuilder) {}
+
+  ngOnInit() {
+    this.createForm();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad NewPlacePage');
+  createForm() {
+    this.newPlaceForm = this.formBuilder.group({
+      name: ['', Validators.required]
+    });
+  }
+
+  onSubmit() {
+    
   }
 
 }
