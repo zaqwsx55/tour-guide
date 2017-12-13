@@ -1,14 +1,17 @@
 <ion-header>
   <ion-navbar>
+    <ion-buttons end>
+      <button (click)="onLoadNewPlace()" ion-button icon-only >
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>
-      Ionic Blank
+      Tour Guide
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-input type="text" placeholder="Enter text here" [(ngModel)]="data"></ion-input>
+  <button ion-button (click)="onLoadPlaces()">Load Places</button>
 </ion-content>
