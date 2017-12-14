@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { PlacesService } from '../../services/places.service';
 
 @IonicPage()
 @Component({
@@ -11,7 +13,9 @@ export class NewPlacePage implements OnInit {
 
   newPlaceForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder,
+              private placesService: PlacesService,
+              private navController: NavController) {}
 
   ngOnInit() {
     this.createForm();
@@ -24,7 +28,8 @@ export class NewPlacePage implements OnInit {
   }
 
   onSubmit() {
-    
+    this.placesService.addPlace(this.newPlaceForm.value);
+    this.navController.pop();
   }
 
 }

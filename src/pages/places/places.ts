@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the PlacesPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Place } from '../../models/place';
+import { PlacesService } from '../../services/places.service';
 
 @IonicPage()
 @Component({
@@ -15,14 +11,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class PlacesPage {
 
+  places: Place[] = [];
 
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    console.log(this.navParams.get('data1'));
+  constructor(private navCtrl: NavController, 
+              private navParams: NavParams,
+              private placesService: PlacesService) {
+    console.log('data: ' + this.navParams.get('data1'));
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PlacesPage');
+  ionViewWillEnter() {
+    this.places = this.placesService.getPlaces();
   }
 
 }
