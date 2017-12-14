@@ -1,8 +1,12 @@
+import { Storage } from '@ionic/storage';
+
+import { Place } from '../models/place';
+
 export class PlacesService {
 
-    private places: {title: string}[] = [];
+    private places: Place[] = [];
 
-    addPlace(place: {title: string}) {
+    addPlace(place: Place) {
         this.places.push(place);
     }
 
