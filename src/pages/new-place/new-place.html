@@ -7,9 +7,21 @@
 <ion-content padding>
   <form [formGroup]="newPlaceForm" (ngSubmit)="onSubmit()" novalidate>
     <ion-item>
-      <ion-label>Title</ion-label>
+      <ion-label>name</ion-label>
       <ion-input type="text" formControlName="name"></ion-input>
     </ion-item>
     <button ion-button block type="submit">Add Place</button>
   </form>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button block (click)="onLocateUser()">Locate me</button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p>Your location: {{ location?.coords.latitude }} / {{ location?.coords.longitude }}</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Geolocation } from '@ionic-native/geolocation';
 
 import { PlacesService } from '../../services/places.service';
 
@@ -12,10 +13,12 @@ import { PlacesService } from '../../services/places.service';
 export class NewPlacePage implements OnInit {
 
   newPlaceForm: FormGroup;
+  location: any;
 
   constructor(private formBuilder: FormBuilder,
               private placesService: PlacesService,
-              private navController: NavController) {}
+              private navController: NavController,
+              private geolocation: Geolocation) {}
 
   ngOnInit() {
     this.createForm();
@@ -30,6 +33,15 @@ export class NewPlacePage implements OnInit {
   onSubmit() {
     this.placesService.addPlace(this.newPlaceForm.value);
     this.navController.pop();
+  }
+
+  onLocateUser() {
+    this.geolocation.getCurrentPosition().then((location) => {
+      console.log('Location fetched successfully');
+      this.location = location;
+    }).catch((error) => {
+      console.log('An error occurred. ', error);
+    })
   }
 
 }
