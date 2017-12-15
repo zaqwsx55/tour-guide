@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 
 import { Place } from '../../models/place';
 import { PlacesService } from '../../services/places.service';
+import { PlacePage } from '../place/place';
 
 @IonicPage()
 @Component({
@@ -15,12 +16,20 @@ export class PlacesPage {
 
   constructor(private navCtrl: NavController, 
               private navParams: NavParams,
-              private placesService: PlacesService) {
+              private placesService: PlacesService,
+              private modalCtrl: ModalController) {
     console.log('data: ' + this.navParams.get('data1'));
   }
 
   ionViewWillEnter() {
-    this.places = this.placesService.getPlaces();
+    this.placesService.getPlaces().then((places) => {
+      this.places = places;
+    });
+  }
+
+  opOpenPlace() {
+    this.modalCtrl.create(PlacePage).present();
+
   }
 
 }
