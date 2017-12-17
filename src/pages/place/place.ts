@@ -12,13 +12,17 @@ export class PlacePage {
 
   map: GoogleMap;
 
-  constructor(private viewCtrl: ViewController) {}
+  constructor(private viewCtrl: ViewController,
+              private googleMaps: GoogleMaps) {}
 
   ionViewDidLoad() {
+    console.log('ion view did load');
     this.loadMap();
   }
 
   loadMap() {
+
+    console.log('load map');
 
     let mapOptions: GoogleMapOptions = {
       camera: {
@@ -31,9 +35,12 @@ export class PlacePage {
       }
     };
 
-    this.map = GoogleMaps.create('map_canvas', mapOptions);
+    this.map = this.googleMaps.create('map', mapOptions);
 
     // Wait the MAP_READY before using any methods
+
+
+
     this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
       console.log('Map is ready!');
       // Now you can use all mathods safely
@@ -46,6 +53,7 @@ export class PlacePage {
           lng: -89.3809802
         }
       }).then(marker => {
+        console.log('then...');
         marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
           alert('clicked');
         });
