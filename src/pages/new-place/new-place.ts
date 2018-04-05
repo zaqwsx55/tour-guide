@@ -31,6 +31,8 @@ export class NewPlacePage implements OnInit {
   }
 
   onSubmit() {
+    console.log('Form submitted');
+    console.log(this.newPlaceForm);
     this.placesService.addPlace(this.newPlaceForm.value);
     this.navController.pop();
   }
