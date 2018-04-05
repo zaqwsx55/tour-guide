@@ -3,7 +3,7 @@
     <name>Tour Guide</name>
     <description>Tour Guide</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://192.168.1.214:8100" />
+    <content original-src="index.html" src="http://192.168.8.100:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -79,6 +79,7 @@
     <allow-navigation href="http://192.168.1.141:8100" />
     <allow-navigation href="http://192.168.1.214:8100" />
     <allow-navigation href="http://192.168.42.26:8100" />
+    <allow-navigation href="http://192.168.8.100:8100" />
     <engine name="browser" spec="5.0.1" />
     <engine name="android" spec="6.3.0" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
