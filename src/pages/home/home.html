@@ -12,10 +12,21 @@
 </ion-header>
 
 <ion-content padding>
+
+  <div>
+    <button ion-button (click)="loadMapPage()">Load Map</button>
+  </div>
+
+  <button ion-button (click)="navigate()">Navigate to new paged</button>
+
+
   <ion-input type="text" placeholder="Enter text here" [(ngModel)]="data"></ion-input>
   <button ion-button (click)="onLoadPlaces()">Load Places</button>
+
 
   <div id="map_canvas">
     <button ion-button (click)="onButtonClick($event)">Demo 2</button>
   </div>
+
+
 </ion-content>

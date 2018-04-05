@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 
 import { Place } from '../../models/place';
 import { PlacesService } from '../../services/places.service';
-import { PlacePage } from '../place/place';
 
 @IonicPage()
 @Component({
@@ -28,7 +27,7 @@ export class PlacesPage {
   }
 
   opOpenPlace() {
-    this.modalCtrl.create(PlacePage).present();
+    this.modalCtrl.create('PlacePage').present();
 
   }
 

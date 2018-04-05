@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-
-import { PlacesPage } from '../places/places';
-import { NewPlacePage } from '../new-place/new-place';
-
+import { NavController, IonicPage } from 'ionic-angular';
 
 import { Geolocation } from '@ionic-native/geolocation';
 
@@ -17,7 +13,7 @@ import {
   MyLocation
 } from '@ionic-native/google-maps';
 
-
+@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -30,16 +26,26 @@ export class HomePage {
   map: GoogleMap;
   location: MyLocation;
 
-  constructor(public navCtrl: NavController, public toastCtrl: ToastController, private geolocation: Geolocation) {}
+  constructor(private navCtrl: NavController, public toastCtrl: ToastController, private geolocation: Geolocation) {}
+
+  loadMapPage(): void {
+    this.navCtrl.push('MapPage');
+  }
+
+  navigate(): void {
+
+    this.navCtrl.push('NewPage');
+
+  }
 
   onLoadPlaces() {
-    this.navCtrl.push(PlacesPage, {
+    this.navCtrl.push('PlacesPage', {
       data1: this.data
     });
   }
 
   onLoadNewPlace() {
-    this.navCtrl.push(NewPlacePage);
+    this.navCtrl.push('NewPlacePage');
   }
 
 
