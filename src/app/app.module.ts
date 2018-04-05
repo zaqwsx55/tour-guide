@@ -7,33 +7,26 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Geolocation } from '@ionic-native/geolocation';
 import { GoogleMaps } from '@ionic-native/google-maps';
 
+import { AngularFireModule } from 'angularfire2';
+import { FIREBASE_CREDENTIALS } from './firebase.credentials';
+
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-import { PlacesPage } from '../pages/places/places';
-import { NewPlacePage } from '../pages/new-place/new-place';
 import { PlacePage } from '../pages/place/place';
 import { PlacesService } from '../services/places.service';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
-    PlacesPage,
-    NewPlacePage,
-    PlacePage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    AngularFireModule.initializeApp(FIREBASE_CREDENTIALS)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
-    PlacesPage,
-    NewPlacePage,
-    PlacePage
   ],
   providers: [
     StatusBar,
