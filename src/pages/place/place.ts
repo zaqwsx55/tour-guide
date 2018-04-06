@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, ViewController } from 'ionic-angular';
-import { GoogleMaps, GoogleMap, GoogleMapsEvent, GoogleMapOptions, 
-  CameraPosition, MarkerOptions, Marker } from '@ionic-native/google-maps';
+import { IonicPage, ViewController, NavParams, LoadingController, Loading } from 'ionic-angular';
+import { Observable } from 'rxjs/Observable';
+
+import { PlacesService } from './../../services/places.service';
+import { Place } from './../../models/place';
 
 @IonicPage()
 @Component({
@@ -10,56 +12,28 @@ import { GoogleMaps, GoogleMap, GoogleMapsEvent, GoogleMapOptions,
 })
 export class PlacePage {
 
-  map: GoogleMap;
+  place: Place;
+  placeId: string;
+  loading: Loading;
 
   constructor(private viewCtrl: ViewController,
-              private googleMaps: GoogleMaps) {}
-
-  ionViewDidLoad() {
-    console.log('ion view did load');
-    this.loadMap();
+              private navParams: NavParams, 
+              private placesService: PlacesService,
+              private loadingCtrl: LoadingController) {
+    this.placeId = this.navParams.get('placeId');
+    // let placeId = this.navParams.get('placeId');
+    // this.place = this.placesService.getPlace(placeId);
   }
 
-  loadMap() {
-
-    console.log('load map');
-
-    let mapOptions: GoogleMapOptions = {
-      camera: {
-        target: {
-          lat: 43.0741904,
-          lng: -89.3809802
-        },
-        zoom: 18,
-        tilt: 30
-      }
-    };
-
-    this.map = this.googleMaps.create('map', mapOptions);
-
-    // Wait the MAP_READY before using any methods
-
-
-
-    this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
-      console.log('Map is ready!');
-      // Now you can use all mathods safely
-      this.map.addMarker({
-        title: 'Ionic',
-        icon: 'blue',
-        animation: 'DROP',
-        position: {
-          lat: 43.0741904,
-          lng: -89.3809802
-        }
-      }).then(marker => {
-        console.log('then...');
-        marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-          alert('clicked');
-        });
-      });
+  ionViewDidLoad() {
+    this.loading = this.loadingCtrl.create({
+      content: 'Ładowanie...'
     });
-
+    this.loading.present();
+    this.placesService.getPlace(this.placeId).subscribe((place) => {
+      this.place = place;
+      this.loading.dismiss();
+    })
   }
 
   onDismiss() {

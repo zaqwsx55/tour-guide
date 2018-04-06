@@ -1,11 +1,12 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Place</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>{{ place?.name }}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <p>It works!!!</p>
-  <button ion-button block (click)="onDismiss()">Dismiss</button>
+  <img src="{{ place?.photo }}">
+  <p>{{ place?.desc }}</p>
+  <button ion-button block (click)="onDismiss()" color="accent">Zamknij</button>
   <div id="map" style="width: 100%; height: 100%"></div>
 </ion-content>
