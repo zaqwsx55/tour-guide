@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 
 declare var google;
@@ -17,9 +17,7 @@ export class MapPage {
 
   //public map: google.maps.Map = null;
 
-  constructor(private navCtrl: NavController,
-              private navParams: NavParams,
-              private geolocation: Geolocation) {}
+  constructor(private geolocation: Geolocation) {}
 
   ionViewDidLoad() {
 
@@ -30,7 +28,6 @@ export class MapPage {
       this.initMap();
     });
 
-    
   }
 
   initMap() {
@@ -40,7 +37,7 @@ export class MapPage {
 
     let mapOptions = {
       center: latLng,
-      zoom: 20,
+      zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       styles: [
         {

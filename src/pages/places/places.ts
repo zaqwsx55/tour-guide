@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, LoadingController, Loading } from 'ionic-angular';
-import { Observable } from 'rxjs/Observable';
 
-import { Place } from '../../models/place';
 import { PlacesService } from '../../services/places.service';
 
 @IonicPage()

@@ -3,7 +3,7 @@ import { IonicPage, NavController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Geolocation } from '@ionic-native/geolocation';
 
-import { PlacesService } from '../../services/places.service';
+// import { PlacesService } from '../../services/places.service';
 
 @IonicPage()
 @Component({
@@ -16,7 +16,7 @@ export class NewPlacePage implements OnInit {
   location: any;
 
   constructor(private formBuilder: FormBuilder,
-              private placesService: PlacesService,
+              // private placesService: PlacesService,
               private navController: NavController,
               private geolocation: Geolocation) {}
 

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, ViewController, NavParams, LoadingController, Loading } from 'ionic-angular';
-import { Observable } from 'rxjs/Observable';
 
 import { PlacesService } from './../../services/places.service';
 import { Place } from './../../models/place';

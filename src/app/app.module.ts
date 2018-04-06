@@ -12,7 +12,6 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { FIREBASE_CREDENTIALS } from './firebase.credentials';
 
 import { MyApp } from './app.component';
-import { PlacePage } from '../pages/place/place';
 import { PlacesService } from '../services/places.service';
 
 @NgModule({
