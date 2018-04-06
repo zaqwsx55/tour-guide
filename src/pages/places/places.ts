@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, LoadingController, Loading } from 'ionic-angular';
+import { Observable } from 'rxjs/Observable';
 
 import { Place } from '../../models/place';
 import { PlacesService } from '../../services/places.service';
@@ -11,24 +12,49 @@ import { PlacesService } from '../../services/places.service';
 })
 export class PlacesPage {
 
-  places: Place[] = [];
+  //places: Place[] = [];
+
+  places: any;
+  loading: Loading;
 
   constructor(private navCtrl: NavController, 
               private navParams: NavParams,
               private placesService: PlacesService,
-              private modalCtrl: ModalController) {
+              private modalCtrl: ModalController,
+              private loadingCtrl: LoadingController) {
     console.log('data: ' + this.navParams.get('data1'));
   }
 
-  ionViewWillEnter() {
-    this.placesService.getPlaces().then((places) => {
-      this.places = places;
+  // ionViewWillEnter() {
+  //   this.placesService.getPlaces().then((places) => {
+  //     this.places = places;
+  //   });
+  // }
+
+  ionViewDidLoad() {
+    console.log('ion view did load');
+    this.loading = this.loadingCtrl.create({
+      content: 'Ładowanie...'
     });
+    this.loading.present();
   }
 
-  opOpenPlace() {
-    this.modalCtrl.create('PlacePage').present();
+  ionViewWillEnter() {
+    console.log('ion view will enter');
+    this.placesService.getPlaces().subscribe((placesList) => {
+      this.places = placesList;
+      this.loading.dismiss();
+    });
+    // this.places = this.placesService.getPlaces();
+  }
 
+  onOpenPlace(placeId) {
+    console.log('placeId: ' + placeId);
+    this.modalCtrl.create('PlacePage', { placeId: placeId }).present();
+  }
+
+  onLoadNewPlace() {
+    this.navCtrl.push('NewPlacePage');
   }
 
 }
