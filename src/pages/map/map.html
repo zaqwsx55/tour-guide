@@ -1,9 +1,16 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Map</ion-title>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Mapa</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
+  <div>
+    Current position<br>
+    Lat: {{ position?.coords.latitude }}, Lng: {{ position?.coords.longitude }}
+  </div>
   <div #map id="map"></div>
 </ion-content>
