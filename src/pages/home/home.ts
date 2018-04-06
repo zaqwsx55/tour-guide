@@ -20,8 +20,6 @@ import {
 })
 export class HomePage {
 
-  data: string;
-
   mapReady: boolean = false;
   map: GoogleMap;
   location: MyLocation;
@@ -36,16 +34,6 @@ export class HomePage {
 
     this.navCtrl.push('NewPage');
 
-  }
-
-  onLoadPlaces() {
-    this.navCtrl.push('PlacesPage', {
-      data1: this.data
-    });
-  }
-
-  onLoadNewPlace() {
-    this.navCtrl.push('NewPlacePage');
   }
 
 

@@ -1,10 +1,8 @@
 <ion-header>
-  <ion-navbar>
-    <ion-buttons end>
-      <button (click)="onLoadNewPlace()" ion-button icon-only >
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-buttons>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>
       Tour Guide
     </ion-title>
@@ -14,15 +12,8 @@
 <ion-content padding>
 
   <div>
-    <button ion-button (click)="loadMapPage()">Load Map</button>
+    <button ion-button (click)="loadMapPage()" color="accent">Load Map</button>
   </div>
-
-  <button ion-button (click)="navigate()">Navigate to new paged</button>
-
-
-  <ion-input type="text" placeholder="Enter text here" [(ngModel)]="data"></ion-input>
-  <button ion-button (click)="onLoadPlaces()">Load Places</button>
-
 
   <div id="map_canvas">
     <button ion-button (click)="onButtonClick($event)">Demo 2</button>
