@@ -1,9 +1,15 @@
-export class Place {
-
+export interface Place {
+    
     name: string;
-    location: {
-        lat: number,
-        lng: number
-    }
+    desc: string;
+    lat: number;
+    lng: number;
+    photo: string;
+
+}
+
+export interface PlaceId extends Place {
+
+    id: string;
 
 }
