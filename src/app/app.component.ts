@@ -21,10 +21,10 @@ export class MyApp {
       splashScreen.hide();
     });
     this.pages = [
-      {title: 'Home Page', component: 'HomePage'},
-      {title: 'Miejsca', component: 'PlacesPage'},
-      {title: 'Trasy', component: 'RoutesPage'},
-      {title: 'Mapa', component: 'MapPage'}
+      {title: 'Home Page', component: 'HomePage', icon: 'home'},
+      {title: 'Miejsca', component: 'PlacesPage', icon: 'pin'},
+      {title: 'Trasy', component: 'RoutesPage', icon: 'navigate'},
+      {title: 'Mapa', component: 'MapPage', icon: 'map'}
     ];
   }
 
