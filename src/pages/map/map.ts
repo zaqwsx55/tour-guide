@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage } from 'ionic-angular';
+import { IonicPage, LoadingController, Loading } from 'ionic-angular';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
+
+import { MAP_STYLES } from './map.styles';
 
 declare var google;
 
@@ -14,199 +16,105 @@ export class MapPage {
   @ViewChild('map') mapElement;
   map: any;
   position: Geoposition;
+  // latLng: google.maps.LatLng = null;
+  latLng = {};
+  // marker: google.maps.Marker = null;
+  marker: any;
+  loading: Loading;
 
   //public map: google.maps.Map = null;
 
-  constructor(private geolocation: Geolocation) {}
+  constructor(private geolocation: Geolocation, private loadingCtrl: LoadingController) {}
 
   ionViewDidLoad() {
 
-    console.log('ion view did load');
+    this.loading = this.loadingCtrl.create({
+      content: 'Lokalizacja...'
+    });
+    this.loading.present();
+
+    this.latLng = {
+      lat: 50.06,
+      lng: 19.93
+    }
+
+    console.log(this.latLng);
+
+    this.map = new google.maps.Map(this.mapElement.nativeElement, {
+      center: this.latLng,
+      zoom: 10,
+      styles: MAP_STYLES
+    });
+
+    this.marker = new google.maps.Marker({
+      position: this.latLng,
+      map: this.map
+    });
 
     this.geolocation.watchPosition().subscribe((position) => {
       this.position = position;
-      this.initMap();
-    });
+      this.latLng = {
+        lat: this.position.coords.latitude,
+        lng: this.position.coords.longitude
+      };
+      console.log(this.latLng);
+      this.map.setCenter(this.latLng);
+      this.map.setZoom(18);
+      this.marker.setPosition(this.latLng);
+      this.loading.dismiss();
+    })
+
+
+
+    // this.geolocation.getCurrentPosition().then((position) => {
+    //   this.position = position;
+    //   this.latLng = new google.maps.LatLng(this.position.coords.latitude, this.position.coords.longitude);
+
+    //   let mapOptions = {
+    //       center: this.latLng,
+    //       zoom: 18,
+    //       mapTypeId: google.maps.MapTypeId.ROADMAP,
+    //       styles: MAP_STYLES
+    //     };
+
+    //     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+
+    //     this.marker = new google.maps.Marker({
+    //       position: this.latLng,
+    //       map: this.map
+    //     });
+      
+    //   });
+
+    // this.geolocation.watchPosition().subscribe((position) => {
+    //   this.position = position;
+    //   this.latLng = new google.maps.LatLng(this.position.coords.latitude, this.position.coords.longitude);
+
+    //   this.map.setCenter(this.latLng);
+    // });
+
+    // this.initMap();
 
   }
 
   initMap() {
 
     // let latLng = new google.maps.LatLng(50.0616124, 19.9391191);
-    let latLng = new google.maps.LatLng(this.position.coords.latitude, this.position.coords.longitude);
+    // let latLng = new google.maps.LatLng(this.position.coords.latitude, this.position.coords.longitude);
 
-    let mapOptions = {
-      center: latLng,
-      zoom: 15,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      styles: [
-        {
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "color": "#f5f5f5"
-            }
-          ]
-        },
-        {
-          "elementType": "labels.icon",
-          "stylers": [
-            {
-              "visibility": "off"
-            }
-          ]
-        },
-        {
-          "elementType": "labels.text.fill",
-          "stylers": [
-            {
-              "color": "#616161"
-            }
-          ]
-        },
-        {
-          "elementType": "labels.text.stroke",
-          "stylers": [
-            {
-              "color": "#f5f5f5"
-            }
-          ]
-        },
-        {
-          "featureType": "administrative.land_parcel",
-          "elementType": "labels.text.fill",
-          "stylers": [
-            {
-              "color": "#bdbdbd"
-            }
-          ]
-        },
-        {
-          "featureType": "poi",
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "color": "#eeeeee"
-            }
-          ]
-        },
-        {
-          "featureType": "poi",
-          "elementType": "labels.text.fill",
-          "stylers": [
-            {
-              "color": "#757575"
-            }
-          ]
-        },
-        {
-          "featureType": "poi.park",
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "color": "#e5e5e5"
-            }
-          ]
-        },
-        {
-          "featureType": "poi.park",
-          "elementType": "labels.text.fill",
-          "stylers": [
-            {
-              "color": "#9e9e9e"
-            }
-          ]
-        },
-        {
-          "featureType": "road",
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "color": "#ffffff"
-            }
-          ]
-        },
-        {
-          "featureType": "road.arterial",
-          "elementType": "labels.text.fill",
-          "stylers": [
-            {
-              "color": "#757575"
-            }
-          ]
-        },
-        {
-          "featureType": "road.highway",
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "color": "#dadada"
-            }
-          ]
-        },
-        {
-          "featureType": "road.highway",
-          "elementType": "labels.text.fill",
-          "stylers": [
-            {
-              "color": "#616161"
-            }
-          ]
-        },
-        {
-          "featureType": "road.local",
-          "elementType": "labels.text.fill",
-          "stylers": [
-            {
-              "color": "#9e9e9e"
-            }
-          ]
-        },
-        {
-          "featureType": "transit.line",
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "color": "#e5e5e5"
-            }
-          ]
-        },
-        {
-          "featureType": "transit.station",
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "color": "#eeeeee"
-            }
-          ]
-        },
-        {
-          "featureType": "water",
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "color": "#c9c9c9"
-            }
-          ]
-        },
-        {
-          "featureType": "water",
-          "elementType": "labels.text.fill",
-          "stylers": [
-            {
-              "color": "#9e9e9e"
-            }
-          ]
-        }
-      ]
-    };
+    // let mapOptions = {
+    //   center: latLng,
+    //   zoom: 18,
+    //   mapTypeId: google.maps.MapTypeId.ROADMAP,
+    //   styles: MAP_STYLES
+    // };
 
-    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+    // this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
-    let marker = new google.maps.Marker({
-      position: latLng,
-      map: this.map
-    });
+    // let marker = new google.maps.Marker({
+    //   position: latLng,
+    //   map: this.map
+    // });
 
   }
 
