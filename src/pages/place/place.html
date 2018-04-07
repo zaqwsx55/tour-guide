@@ -4,9 +4,12 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <img src="{{ place?.photo }}">
-  <p>{{ place?.desc }}</p>
+<ion-content>
+  <ion-card>
+    <img src="{{ place?.photo }}"/>
+    <ion-card-content>
+      <p>{{ place?.desc }}</p>
+    </ion-card-content>
+  </ion-card>
   <button ion-button block (click)="onDismiss()" color="accent">Zamknij</button>
-  <div id="map" style="width: 100%; height: 100%"></div>
 </ion-content>
