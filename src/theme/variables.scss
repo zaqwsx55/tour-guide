@@ -22,7 +22,11 @@ $app-direction: ltr;
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
 
-
+$font-family-base: 'Raleway';
+$font-family-ios-base: 'Raleway';
+$font-family-md-base: 'Raleway';
+$font-family-wp-base: 'Raleway';
+//$font-family-wp-base: 'Dancing Script';
 
 
 // Named Color Variables
@@ -97,3 +101,9 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+//@import "dancing-script";
+
+// TODO
+// Nie działa import lokalnie z katalogu assets
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Raleway&subset=latin-ext');
