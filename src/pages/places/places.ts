@@ -48,7 +48,8 @@ export class PlacesPage {
 
   onOpenPlace(placeId) {
     console.log('placeId: ' + placeId);
-    this.modalCtrl.create('PlacePage', { placeId: placeId }).present();
+    this.navCtrl.push('PlacePage', { placeId: placeId });
+    // this.modalCtrl.create('PlacePage', { placeId: placeId }).present();
   }
 
   onLoadNewPlace() {
