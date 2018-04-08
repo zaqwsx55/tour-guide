@@ -18,16 +18,23 @@ export class PlacesService {
 
     constructor(private afs: AngularFirestore) {}
 
+    // getPlaces() {
+    //     this.placesCol = this.afs.collection('places');
+    //     this.places = this.placesCol.snapshotChanges()
+    //         .map(actions => {
+    //             return actions.map(a => {
+    //                 const data = a.payload.doc.data() as Place;
+    //                 const id = a.payload.doc.id;
+    //                 return {id, data};
+    //             })
+    //         })
+    //     return this.places;
+    // }
+
+
     getPlaces() {
         this.placesCol = this.afs.collection('places');
-        this.places = this.placesCol.snapshotChanges()
-            .map(actions => {
-                return actions.map(a => {
-                    const data = a.payload.doc.data() as Place;
-                    const id = a.payload.doc.id;
-                    return {id, data};
-                })
-            })
+        this.places = this.placesCol.valueChanges();
         return this.places;
     }
 
