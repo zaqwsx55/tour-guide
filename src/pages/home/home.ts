@@ -12,8 +12,4 @@ export class HomePage {
 
   constructor(private navCtrl: NavController) {}
 
-  loadMapPage(): void {
-    this.navCtrl.push('MapPage');
-  }
-
 }
