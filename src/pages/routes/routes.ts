@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, LoadingController, Loading } from 'ionic-angular';
+import { RoutesProvider } from './../../providers/routes/routes';
+import { Route } from './../../models/route';
 
 @IonicPage()
 @Component({
@@ -8,11 +10,29 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class RoutesPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  loading: Loading;
+  routes: Route[];
+  descSliced = true;
+
+  constructor(private loadingCtrl: LoadingController,
+              private routesProvider: RoutesProvider) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RoutesPage');
+    this.loading = this.loadingCtrl.create({
+      content: 'Ładowanie...'
+    });
+    this.loading.present();
+  }
+
+  ionViewWillEnter() {
+    this.routesProvider.getRoutes().subscribe((routes) => {
+      this.routes = routes;
+      this.loading.dismiss();
+    })
+  }
+
+  readMore() {
+    this.descSliced = false;
   }
 
 }
