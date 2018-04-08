@@ -13,6 +13,7 @@ import { FIREBASE_CREDENTIALS } from './firebase.credentials';
 
 import { MyApp } from './app.component';
 import { PlacesService } from '../services/places.service';
+import { RoutesProvider } from '../providers/routes/routes';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { PlacesService } from '../services/places.service';
     Geolocation,
     GoogleMaps,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    PlacesService
+    PlacesService,
+    RoutesProvider
   ]
 })
 export class AppModule {}
