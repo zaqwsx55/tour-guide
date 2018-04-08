@@ -22,6 +22,12 @@ export class MapPage {
   marker: any;
   loading: Loading;
 
+  marta = {
+    lat: 50.086026,
+    lng: 20.022902
+  };
+  distance: number;
+
   //public map: google.maps.Map = null;
 
   constructor(private geolocation: Geolocation, private loadingCtrl: LoadingController) {}
@@ -40,10 +46,17 @@ export class MapPage {
 
     console.log(this.latLng);
 
+    this.distance = this.calcDistance(this.marta, this.latLng);
+
+    console.log('distance: ' + this.distance);
+
+
+
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
       center: this.latLng,
       zoom: 10,
-      styles: MAP_STYLES
+      styles: MAP_STYLES,
+      disableDefaultUI: true
     });
 
     this.marker = new google.maps.Marker({
@@ -58,9 +71,15 @@ export class MapPage {
         lng: this.position.coords.longitude
       };
       console.log(this.latLng);
+
+      this.distance = this.calcDistance(this.marta, this.latLng);
+
       this.map.setCenter(this.latLng);
       this.map.setZoom(18);
       this.marker.setPosition(this.latLng);
+      // TODO
+      // Sprawdzić, czy Loading jest aktywny
+      // Jeśli tak, to wyłączyć
       this.loading.dismiss();
     })
 
@@ -116,6 +135,12 @@ export class MapPage {
     //   map: this.map
     // });
 
+  }
+
+  calcDistance(point1, point2) {
+    let p1 = new google.maps.LatLng(point1);
+    let p2 = new google.maps.LatLng(point2);
+    return (google.maps.geometry.spherical.computeDistanceBetween(p1, p2)).toFixed(2);
   }
 
 }
