@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, ViewController, NavParams, LoadingController, Loading } from 'ionic-angular';
-
-import { PlacesService } from './../../services/places.service';
+import { PlacesProvider } from './../../providers/places/places';
 import { Place } from './../../models/place';
 
 @IonicPage()
@@ -17,7 +16,7 @@ export class PlacePage {
 
   constructor(private viewCtrl: ViewController,
               private navParams: NavParams, 
-              private placesService: PlacesService,
+              private placesProvider: PlacesProvider,
               private loadingCtrl: LoadingController) {
     this.placeId = this.navParams.get('placeId');
     // let placeId = this.navParams.get('placeId');
@@ -29,7 +28,7 @@ export class PlacePage {
       content: 'Ładowanie...'
     });
     this.loading.present();
-    this.placesService.getPlace(this.placeId).subscribe((place) => {
+    this.placesProvider.getPlace(this.placeId).subscribe((place) => {
       this.place = place;
       this.loading.dismiss();
     })

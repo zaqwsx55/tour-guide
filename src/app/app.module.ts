@@ -12,8 +12,8 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { FIREBASE_CREDENTIALS } from './firebase.credentials';
 
 import { MyApp } from './app.component';
-import { PlacesService } from '../services/places.service';
 import { RoutesProvider } from '../providers/routes/routes';
+import { PlacesProvider } from '../providers/places/places';
 
 @NgModule({
   declarations: [
@@ -36,8 +36,8 @@ import { RoutesProvider } from '../providers/routes/routes';
     Geolocation,
     GoogleMaps,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    PlacesService,
-    RoutesProvider
+    RoutesProvider,
+    PlacesProvider
   ]
 })
 export class AppModule {}

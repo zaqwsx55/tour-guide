@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, LoadingController, Loading } from 'ionic-angular';
-
-import { PlacesService } from '../../services/places.service';
+import { PlacesProvider } from './../../providers/places/places';
+import { Place } from './../../models/place';
 
 @IonicPage()
 @Component({
@@ -12,12 +12,12 @@ export class PlacesPage {
 
   //places: Place[] = [];
 
-  places: any;
+  places: Place[];
   loading: Loading;
 
   constructor(private navCtrl: NavController, 
               private navParams: NavParams,
-              private placesService: PlacesService,
+              private placesProvider: PlacesProvider,
               private modalCtrl: ModalController,
               private loadingCtrl: LoadingController) {
     console.log('data: ' + this.navParams.get('data1'));
@@ -39,7 +39,7 @@ export class PlacesPage {
 
   ionViewWillEnter() {
     console.log('ion view will enter');
-    this.placesService.getPlaces().subscribe((placesList) => {
+    this.placesProvider.getPlaces().subscribe((placesList) => {
       this.places = placesList;
       this.loading.dismiss();
     });
