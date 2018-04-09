@@ -6,7 +6,8 @@
 
 <ion-content>
   <ion-card>
-    <img src="{{ place?.photo }}"/>
+    <ion-spinner *ngIf="!imgLoaded"></ion-spinner>
+    <img src="{{ place?.photo }}" (load)="imageLoaded()"/>
     <ion-card-content>
       <p>{{ place?.desc }}</p>
     </ion-card-content>
