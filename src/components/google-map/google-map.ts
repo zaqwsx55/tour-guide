@@ -70,7 +70,6 @@ export class GoogleMapComponent {
     });
   }
 
-
   private initMap(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.latLng = {
@@ -88,44 +87,6 @@ export class GoogleMapComponent {
         position: this.latLng
       });
       resolve(true);
-    });
-  }
-
-
-
-
-
-  private initMapOld(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.geolocation.getCurrentPosition().then((position) => {
-        console.log(position);
-        this.position = position;
-        this.latLng = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        }
-        // let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        let mapOptions = {
-          center: this.latLng,
-          zoom: 15,
-          disableDefaultUI: true
-        };
-        this.map = new google.maps.Map(this.element.nativeElement, mapOptions);
-
-        let marker = new google.maps.Marker({
-          map: this.map,
-          animation: google.maps.Animation.DROP,
-          position: this.latLng
-        });
-
-
-
-        resolve(true);
-      }
-
-      , (err) => {
-          reject('Could not initialise map');
-      });
     });
   }
 
@@ -150,7 +111,6 @@ export class GoogleMapComponent {
     this.distance = google.maps.geometry.spherical.computeDistanceBetween(p1, p2).toFixed(2);
     return this.distance;
   }
-
 
   public navigate(from, to) {
     let directionsService = new google.maps.DirectionsService;
