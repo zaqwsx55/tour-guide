@@ -12,6 +12,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { FIREBASE_CREDENTIALS } from './firebase.credentials';
 
 import { MyApp } from './app.component';
+import { ComponentsModule } from './../components/components.module';
 import { RoutesProvider } from '../providers/routes/routes';
 import { PlacesProvider } from '../providers/places/places';
 
@@ -21,6 +22,7 @@ import { PlacesProvider } from '../providers/places/places';
   ],
   imports: [
     BrowserModule,
+    ComponentsModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(FIREBASE_CREDENTIALS),
