@@ -8,9 +8,12 @@
 </ion-header>
 
 <ion-content>
-  <div style="position: absolute; left: 0px; bottom: 0px; z-index: 100; background-color: white; width: 100%">
-    Lat: {{ position?.coords.latitude }}, Lng: {{ position?.coords.longitude }}<br>
-    Distance: {{ distance }}
-  </div>
-  <div #map id="map"></div>
+  <google-map apiKey="AIzaSyCngrSjrelaDtrGed8juOzGwCTNlzLQS34"></google-map>
 </ion-content>
+
+<ion-footer>
+  <!-- <button ion-button color="light" full (click)="testMarker()">Test Marker</button> -->
+  Lat: {{ mapComponent.latLng?.lat }}<br>
+  Lng: {{ mapComponent.latLng?.lng }}<br>
+  Distance: {{ mapComponent.distance }}
+</ion-footer>
